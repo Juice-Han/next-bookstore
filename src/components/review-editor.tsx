@@ -1,35 +1,28 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+'use client'
+
+import { useActionState, useEffect, useState } from 'react'
 import style from './review-editor.module.css'
+import createReviewAction from '@/actions/create-review.action'
 
 export default function ReviewEditor({ bookId }: { bookId: string }) {
-  const createReviewAction = async (formData: FormData) => {
-    'use server'
+  const [state, action, isPending] = useActionState(createReviewAction, null)
 
-    const bookId = formData.get('bookId')
-    const content = formData.get('content')
-    const author = formData.get('author')
-
-    try {
-      if (!content || !author) throw new Error('잘못된 요청입니다.')
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review`, {
-        method: 'post',
-        body: JSON.stringify({ bookId, content, author }),
-      })
-      revalidatePath(`/book/${bookId}`) // 풀라우터 캐시와 캐싱된 패치 데이터를 모두 무효화하고 새로 생성한 페이지를 브라우저에 전달한다.
-    } catch (e) {
-      console.error(e)
+  useEffect(() => {
+    if (state && !state.status) {
+      alert(state.message)
     }
+  }, [state])
 
-    revalidateTag(`review-${bookId}`)
-  }
   return (
     <section className={style.container}>
-      <form action={createReviewAction}>
+      <form action={action}>
         <input type="hidden" name="bookId" value={bookId} readOnly />
-        <textarea name="content" placeholder="리뷰 내용" required />
+        <textarea disabled={isPending} name="content" placeholder="리뷰 내용" required />
         <div className={style.submit_container}>
-          <input name="author" placeholder="작성자" required />
-          <button type="submit">작성하기</button>
+          <input disabled={isPending} name="author" placeholder="작성자" required />
+          <button disabled={isPending} type="submit">
+            작성하기
+          </button>
         </div>
       </form>
     </section>
