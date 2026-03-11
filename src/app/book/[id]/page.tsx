@@ -1,10 +1,29 @@
-import { BookData } from '@/types'
+import { BookData, ReviewData } from '@/types'
 import style from './page.module.css'
 import ReviewEditor from '@/components/review-editor'
+import ReviewItem from '@/components/review-item'
+
+async function ReviewList({ bookId }: { bookId: string }) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/book/${bookId}`, {
+    cache: 'force-cache',
+    next: { tags: [`review-${bookId}`] },
+  })
+  if (!response.ok) throw new Error(response.statusText)
+
+  const reviews: ReviewData[] = await response.json()
+  return (
+    <section>
+      {reviews.map((review: ReviewData) => (
+        <ReviewItem key={`review-item-${review.id}`} {...review} />
+      ))}
+    </section>
+  )
+}
 
 async function BookDetail({ bookId }: { bookId: string }) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/book/${bookId}`, {
     cache: 'force-cache',
+    next: { tags: [`book-detail-${bookId}`] },
   })
   if (!response.ok) throw new Error(response.statusText)
 
@@ -36,6 +55,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     <div className={style.container}>
       <BookDetail bookId={id} />
       <ReviewEditor bookId={id} />
+      <ReviewList bookId={id} />
     </div>
   )
 }
