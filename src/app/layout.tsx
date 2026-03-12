@@ -11,16 +11,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="bg-[#fafafa] text-black">
         {modal}
         {/* createPortal로 렌더링할 Modal의 위치 */}
         <div id="modal-root"></div>
-        <div className={style.container}>
-          <header>
+        <div className="max-w-150 min-h-screen my-0 mx-auto bg-white py-0 px-3.75 shadow-[0px_7px_29px_0px_rgba(100,100,111,0.2)]">
+          <header className="h-60px font-bold text-[18px] leading-15">
             <Link href={'/'}>📚 JuiceHan Book Store</Link>
           </header>
-          <main>{children}</main>
-          <footer>제작 @JuiceHan</footer>
+          <main className="pt-2.5">{children}</main>
+          <footer className="py-25 px-0 text-[#808080]">제작 @JuiceHan</footer>
         </div>
       </body>
     </html>

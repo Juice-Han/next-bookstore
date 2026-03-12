@@ -21,7 +21,7 @@ export default async function Page() {
   return (
     <div className={style.container}>
       <section>
-        <h3>지금 추천하는 도서</h3>
+        <h3 className="text-xl">지금 추천하는 도서</h3>
         <Suspense
           fallback={new Array(3).fill(0).map((_, idx) => (
             <BookItemSkeleton key={`reco-book-skeleton-${idx}`} />
@@ -31,7 +31,7 @@ export default async function Page() {
         </Suspense>
       </section>
       <section>
-        <h3>등록된 모든 도서</h3>
+        <h3 className="text-xl">등록된 모든 도서</h3>
         <Suspense
           fallback={new Array(5).fill(0).map((_, idx) => (
             <BookItemSkeleton key={`all-book-skeleton-${idx}`} />
