@@ -1,6 +1,5 @@
 import type { BookData } from '@/types'
 import Link from 'next/link'
-import style from './book-item.module.css'
 import Image from 'next/image'
 
 export default function BookItem({
@@ -13,7 +12,11 @@ export default function BookItem({
   priority = false,
 }: BookData) {
   return (
-    <Link href={`/book/${id}`} className={style.container} scroll={false}>
+    <Link
+      href={`/book/${id}`}
+      className="flex gap-3.75 px-2.5 py-5 border-b border-[rgb(220,220,220)]"
+      scroll={false}
+    >
       <Image
         src={coverImgUrl}
         width={80}
@@ -22,10 +25,10 @@ export default function BookItem({
         priority={priority}
       />
       <div>
-        <div className={style.title}>{title}</div>
-        <div className={style.subTitle}>{subTitle}</div>
+        <div className="font-bold">{title}</div>
+        <div className="break-keep">{subTitle}</div>
         <br />
-        <div className={style.author}>
+        <div className="text-gray-500">
           {author} | {publisher}
         </div>
       </div>

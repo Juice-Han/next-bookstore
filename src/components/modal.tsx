@@ -1,7 +1,6 @@
 'use client'
 
 import { ReactNode, useEffect } from 'react'
-import style from './modal.module.css'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
 
@@ -16,14 +15,16 @@ export default function Modal({ children }: { children: ReactNode }) {
   }, [])
   return createPortal(
     <div
-      className={style.backdrop}
+      className="bg-black/70 fixed inset-0 p-0 z-999 flex justify-center items-center"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           router.back()
         }
       }}
     >
-      <div className={style.modal}>{children}</div>
+      <div className="max-w-150 max-h-[80vh] w-full h-full p-5 bg-white rounded-[5px] relative z-1000 overflow-y-scroll">
+        {children}
+      </div>
     </div>,
     document.getElementById('modal-root') as HTMLElement,
   )
