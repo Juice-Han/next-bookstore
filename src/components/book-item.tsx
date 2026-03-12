@@ -10,10 +10,17 @@ export default function BookItem({
   author,
   publisher,
   coverImgUrl,
+  priority = false,
 }: BookData) {
   return (
     <Link href={`/book/${id}`} className={style.container} scroll={false}>
-      <Image src={coverImgUrl} width={80} height={105} alt={`도서 "${title}"의 표지 이미지`} />
+      <Image
+        src={coverImgUrl}
+        width={80}
+        height={105}
+        alt={`도서 "${title}"의 표지 이미지`}
+        priority={priority}
+      />
       <div>
         <div className={style.title}>{title}</div>
         <div className={style.subTitle}>{subTitle}</div>

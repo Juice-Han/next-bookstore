@@ -6,6 +6,7 @@ export interface BookData {
   publisher: string
   description: string
   coverImgUrl: string
+  priority?: boolean
 }
 
 export interface ReviewData {

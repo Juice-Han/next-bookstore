@@ -76,7 +76,7 @@ async function RecoBooks() {
     return (
       <>
         {randomBooks.map((book) => (
-          <BookItem key={`all-${book.id}`} {...book} />
+          <BookItem key={`all-${book.id}`} {...book} priority={true} />
         ))}
       </>
     )
