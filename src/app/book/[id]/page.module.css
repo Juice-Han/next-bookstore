@@ -11,6 +11,7 @@
 }
 
 .cover_img_container {
+  height: 350px;
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -35,6 +36,7 @@
 .cover_img_container > img {
   z-index: 1;
   max-height: 350px;
+  width: auto;
   height: 100%;
 }
 
