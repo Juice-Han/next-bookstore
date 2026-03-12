@@ -4,6 +4,24 @@ import ReviewEditor from '@/components/review-editor'
 import ReviewItem from '@/components/review-item'
 import Image from 'next/image'
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/book/${id}`, {})
+  if (!response.ok) throw new Error(response.statusText)
+
+  const book: BookData = await response.json()
+
+  return {
+    title: `${book.title} - JuiceHan Book Store`,
+    description: `${book.description}`,
+    openGraph: {
+      title: `${book.title} - JuiceHan Book Store`,
+      description: `${book.description}`,
+      images: [book.coverImgUrl],
+    },
+  }
+}
+
 async function ReviewList({ bookId }: { bookId: string }) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/book/${bookId}`, {
     cache: 'force-cache',

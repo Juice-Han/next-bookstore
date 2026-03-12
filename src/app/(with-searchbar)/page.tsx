@@ -3,8 +3,19 @@ import style from './page.module.css'
 import { BookData } from '@/types'
 import { Suspense } from 'react'
 import BookItemSkeleton from '@/components/book-item-skeleton'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'JuiceHan Book Store',
+  description: 'JuiceHan 서점에 오신 것을 환영합니다.',
+  openGraph: {
+    title: 'JuiceHan Book Store',
+    description: '최신 인기 도서를 구경해보세요',
+    images: ['/thumbnail.png'],
+  },
+}
 
 export default async function Page() {
   return (

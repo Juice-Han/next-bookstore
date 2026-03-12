@@ -3,6 +3,23 @@ import BookItemSkeleton from '@/components/book-item-skeleton'
 import { BookData } from '@/types'
 import { Suspense } from 'react'
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>
+}) {
+  const { q } = await searchParams
+  return {
+    title: `${q}: JuiceHan Book Store 검색`,
+    description: `${q} 검색 결과입니다.`,
+    openGraph: {
+      title: `${q}: JuiceHan Book Store 검색`,
+      description: `${q} 검색 결과입니다.`,
+      images: ['/thumbnail.png'],
+    },
+  }
+}
+
 async function SearchResult({ q }: { q: string }) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/book/search?q=${q}`, {
     cache: 'force-cache',
