@@ -3,6 +3,7 @@ import style from './page.module.css'
 import ReviewEditor from '@/components/review-editor'
 import ReviewItem from '@/components/review-item'
 import Image from 'next/image'
+import { delay } from '@/util/delay'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -45,6 +46,8 @@ async function BookDetail({ bookId }: { bookId: string }) {
     next: { tags: [`book-detail-${bookId}`] },
   })
   if (!response.ok) throw new Error(response.statusText)
+
+  await delay(5000)
 
   const book: BookData = await response.json()
   const { title, subTitle, description, author, publisher, coverImgUrl } = book
