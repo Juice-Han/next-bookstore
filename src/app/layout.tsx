@@ -10,6 +10,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
+        {/* createPortal로 렌더링할 Modal의 위치 */}
+        <div id="modal-root"></div>
         <div className={style.container}>
           <header>
             <Link href={'/'}>📚 JuiceHan Book Store</Link>
