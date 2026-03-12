@@ -3,7 +3,6 @@ import style from './page.module.css'
 import ReviewEditor from '@/components/review-editor'
 import ReviewItem from '@/components/review-item'
 import Image from 'next/image'
-import { delay } from '@/util/delay'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -32,7 +31,7 @@ async function ReviewList({ bookId }: { bookId: string }) {
 
   const reviews: ReviewData[] = await response.json()
   return (
-    <section>
+    <section className="flex flex-col gap-2.5">
       {reviews.map((review: ReviewData) => (
         <ReviewItem key={`review-item-${review.id}`} {...review} />
       ))}
@@ -47,25 +46,31 @@ async function BookDetail({ bookId }: { bookId: string }) {
   })
   if (!response.ok) throw new Error(response.statusText)
 
-  await delay(5000)
-
   const book: BookData = await response.json()
   const { title, subTitle, description, author, publisher, coverImgUrl } = book
 
   return (
-    <section>
+    <section className="flex flex-col gap-2.5">
       <div
-        className={style.cover_img_container}
+        className="h-87.5 flex justify-center p-5 bg-center bg-no-repeat bg-cover relative before:content-[''] before:absolute before:inset-0 before:bg-black/70"
         style={{ backgroundImage: `url('${coverImgUrl}')` }}
       >
-        <Image src={coverImgUrl} width={240} height={300} alt={`도서 "${title}의 표지 이미지`} />
+        <Image
+          src={coverImgUrl}
+          width={240}
+          height={300}
+          alt={`도서 "${title}의 표지 이미지`}
+          className="z-1 max-h-87.5 w-auto h-full"
+        />
       </div>
-      <div className={style.title}>{title}</div>
-      <div className={style.subTitle}>{subTitle}</div>
-      <div className={style.author}>
+      <div className="text-lg font-bold">{title}</div>
+      <div className="text-gray-500">{subTitle}</div>
+      <div className="text-gray-500">
         {author} | {publisher}
       </div>
-      <div className={style.description}>{description}</div>
+      <div className="bg-[rgb(245,245,245)] p-3.75 leading-[1.3] whitespace-pre-line rounded-[5px]">
+        {description}
+      </div>
     </section>
   )
 }
@@ -74,7 +79,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const { id } = await params
 
   return (
-    <div className={style.container}>
+    <div className="flex flex-col gap-12.5">
       <BookDetail bookId={id} />
       <ReviewEditor bookId={id} />
       <ReviewList bookId={id} />
