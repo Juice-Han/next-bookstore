@@ -23,7 +23,7 @@ export default function ReviewEditor({ bookId }: { bookId: string }) {
           readOnly
         />
         <textarea
-          className="w-full h-full resize-y p-2.5 box-border border border-[rgb(220,220,220)] rounded-[5px]"
+          className="w-full h-full resize-y p-2.5 box-border border border-[rgb(220,220,220)] rounded-[5px] disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isPending}
           name="content"
           placeholder="리뷰 내용"
@@ -31,14 +31,14 @@ export default function ReviewEditor({ bookId }: { bookId: string }) {
         />
         <div className="flex justify-end gap-1.25">
           <input
-            className="p-2.5 box-border border border-[rgb(220,220,220)] rounded-[5px]"
+            className="p-2.5 box-border border border-[rgb(220,220,220)] rounded-[5px] disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isPending}
             name="author"
             placeholder="작성자"
             required
           />
           <button
-            className="w-20 p-2.5 bg-[rgb(37,147,255)] text-white border-none rounded-[5px] cursor-pointer"
+            className="w-20 p-2.5 bg-[rgb(37,147,255)] text-white border-none rounded-[5px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isPending}
             type="submit"
           >
