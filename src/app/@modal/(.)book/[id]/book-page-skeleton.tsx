@@ -1,5 +1,3 @@
-import style from './book-page-skeleton.module.css'
-
 export default function BokPageSkeleton() {
   return (
     <div className="flex flex-col gap-2.5">

@@ -1,5 +1,4 @@
 import { BookData, ReviewData } from '@/types'
-import style from './page.module.css'
 import ReviewEditor from '@/components/review-editor'
 import ReviewItem from '@/components/review-item'
 import Image from 'next/image'

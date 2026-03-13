@@ -1,5 +1,4 @@
 import BookItem from '@/components/book-item'
-import style from './page.module.css'
 import { BookData } from '@/types'
 import { Suspense } from 'react'
 import BookItemSkeleton from '@/components/book-item-skeleton'

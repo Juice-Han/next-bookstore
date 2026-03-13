@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect, useState } from 'react'
+import { useActionState, useEffect } from 'react'
 import createReviewAction from '@/actions/create-review.action'
 
 export default function ReviewEditor({ bookId }: { bookId: string }) {
